@@ -2,23 +2,18 @@
 
 module Scraping
   class Scraper
-    def initialize(page_object, dealer_name, zip_code, pages_count)
+    def initialize(page_object:, dealer_name: 'Chevrolet', zip_code: 75647, pages_count: 5)
       @page_object = page_object
-      @dealer_name = dealer_name
-      @zip_code = zip_code
+      @first_page = "https://www.dealerrater.com/directory/z/#{zip_code}/#{dealer_name}"
       @pages_count = pages_count
     end
 
-    def scrape
-      @page_object.go_to_review_page(first_page)
+    def execute
+      @page_object.go_to_review_page(@first_page)
         .then {|page| extract_reviews(page)}
     end
 
     private
-
-    def first_page
-      "https://www.dealerrater.com/directory/z/#{@zip_code}/#{@dealer_name}"
-    end
 
     def extract_reviews(page)
       current_page = page.dup

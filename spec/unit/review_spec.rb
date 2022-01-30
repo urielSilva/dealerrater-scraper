@@ -1,4 +1,4 @@
-require_relative '../src/domain/review.rb'
+require_relative '../../src/domain/review.rb'
 
 RSpec.describe Domain::Review do
   context '#filter_best_reviews' do
@@ -19,7 +19,7 @@ RSpec.describe Domain::Review do
       )
     end
 
-    it 'uses score as a deciding criteria when rating are tied' do
+    it 'uses score as a deciding criteria when ratings are tied' do
       reviews = [
         { rating: 5, text: '1st review', score: 1.1 },
         { rating: 5, text: '2nd review', score: 3 },

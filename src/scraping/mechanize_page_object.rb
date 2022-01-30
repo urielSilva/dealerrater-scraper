@@ -1,5 +1,5 @@
 module Scraping
-  class PageObject
+  class MechanizePageObject
 
     STRINGS = {
       dealer_page_href: 'mckaig-chevrolet-buick',
@@ -13,8 +13,8 @@ module Scraping
 
     RATING_REGEX = /rating-(\d\d)/
 
-    def initialize(agent)
-      @agent = agent
+    def initialize
+      @agent = Mechanize.new
     end
 
     def go_to_review_page(first_page)
