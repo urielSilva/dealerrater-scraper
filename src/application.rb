@@ -1,8 +1,6 @@
 Dir[File.join(__dir__, 'scraping', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'domain', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'adapters', '*.rb')].each { |file| require file }
-require 'mechanize'
-require 'textmood'
 
 class Application
   class << self

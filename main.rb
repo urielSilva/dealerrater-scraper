@@ -5,8 +5,17 @@ require 'mechanize'
 class Main
   class << self
     def execute
-      top_reviews = setup_dependencies.then {|deps| Application.execute(**deps)}
-      STDOUT.write(top_reviews)
+      setup_dependencies
+        .then { |deps| Application.execute(**deps) }
+        .then { |top_reviews| write_output(top_reviews) }
+    end
+
+    def write_output(top_reviews)
+      STDOUT.write("Top #{top_reviews.size} reviews from McKaig Chevrolet Buick: \n\n")
+      top_reviews.each do |review|
+        STDOUT.write(review)
+        STDOUT.write("\n")
+      end
     end
 
     private
