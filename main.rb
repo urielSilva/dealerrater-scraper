@@ -5,6 +5,7 @@ require 'mechanize'
 class Main
   class << self
     def execute
+      STDOUT.write("Fetching reviews from McKaig Chevrolet Buick... \n\n")
       setup_dependencies
         .then { |deps| Application.execute(**deps) }
         .then { |top_reviews| write_output(top_reviews) }

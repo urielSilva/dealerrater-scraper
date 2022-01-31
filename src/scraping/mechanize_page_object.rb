@@ -1,5 +1,6 @@
 module Scraping
   class MechanizePageObject
+    DEALERS_PAGE = "https://www.dealerrater.com/directory/z/75647/Chevrolet"
 
     STRINGS = {
       dealer_page_href: 'mckaig-chevrolet-buick',
@@ -19,8 +20,8 @@ module Scraping
       @agent = Mechanize.new
     end
 
-    def go_to_review_page(first_page)
-      @agent.get(first_page)
+    def go_to_review_page
+      @agent.get(DEALERS_PAGE)
         .then { |page| page.links.find {|l| l.href&.downcase&.include? STRINGS[:dealer_page_href]}.click }
         .then { |page| page.link_with(text: STRINGS[:review_page_text]).click}
     end
