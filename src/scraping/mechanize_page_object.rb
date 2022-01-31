@@ -8,6 +8,8 @@ module Scraping
       review_snippet_class: '.review-whole',
       review_entry_class: '.review-entry',
       review_rating_class: '.rating-static',
+      review_author_class: '.margin-bottom-sm.line-height-150',
+      review_date_class: '.review-date',
       next_page_text: 'next >'
     }
 
@@ -35,6 +37,14 @@ module Scraping
 
     def review_text(entry)
       entry.search(STRINGS[:review_title_class]).text + entry.search(STRINGS[:review_snippet_class]).text
+    end
+
+    def review_author(entry)
+      entry.search('.margin-bottom-sm.line-height-150').search('span').text.match(/by (.*)/)[1]
+    end
+
+    def review_date(entry)
+      entry.search('.review-date').search('.italic').text
     end
 
     def paginate_review_page(review_page)

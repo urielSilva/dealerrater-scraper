@@ -12,10 +12,7 @@ class Main
 
     def write_output(top_reviews)
       STDOUT.write("Top #{top_reviews.size} reviews from McKaig Chevrolet Buick: \n\n")
-      top_reviews.each do |review|
-        STDOUT.write(review)
-        STDOUT.write("\n")
-      end
+      top_reviews.each { |review| STDOUT.write(review.to_s + "\n") }
     end
 
     private

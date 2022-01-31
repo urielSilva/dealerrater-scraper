@@ -27,7 +27,14 @@ module Scraping
     def extract_reviews_from_page(review_page)
       @page_object.review_entries(review_page)
         .then do |entries|
-          entries.map {|entry| { rating: @page_object.review_rating(entry), text: @page_object.review_text(entry) }}
+          entries.map do |entry|
+            {
+              rating: @page_object.review_rating(entry),
+              text: @page_object.review_text(entry),
+              author: @page_object.review_author(entry),
+              date: @page_object.review_date(entry),
+            }
+          end
         end
     end
   end
