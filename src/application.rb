@@ -8,9 +8,9 @@ class Application
 
     def execute(page_object:, analyser:)
       Scraping::Scraper.new(page_object: page_object).fetch_reviews
-        .then {|reviews| Domain::Review.apply_sentiment_score(reviews, analyser)}
-        .then {|reviews| Domain::Review.filter_best_reviews(reviews, REVIEWS_COUNT)}
-        .then {|reviews| Adapters::Review.format_reviews(reviews)}
+        .then { |reviews| Domain::Review.apply_sentiment_score(reviews, analyser) }
+        .then { |reviews| Domain::Review.filter_best_reviews(reviews, REVIEWS_COUNT) }
+        .then { |reviews| Adapters::Review.format_reviews(reviews) }
     end
   end
 end

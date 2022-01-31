@@ -40,11 +40,11 @@ module Scraping
     end
 
     def review_author(entry)
-      entry.search('.margin-bottom-sm.line-height-150').search('span').text.match(/by (.*)/)[1]
+      entry.search(STRINGS[:review_author_class]).search('span').text.match(/by (.*)/)[1]
     end
 
     def review_date(entry)
-      entry.search('.review-date').search('.italic').text
+      entry.search(STRINGS[:review_date_class]).search('.italic').text
     end
 
     def paginate_review_page(review_page)
