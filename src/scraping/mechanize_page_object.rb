@@ -5,7 +5,7 @@ module Scraping
       dealer_page_href: 'mckaig-chevrolet-buick',
       review_page_text: 'More Reviews',
       review_title_class: '.review-title',
-      review_snippet_class: '.review-snippet',
+      review_snippet_class: '.review-whole',
       review_entry_class: '.review-entry',
       review_rating_class: '.rating-static',
       next_page_text: 'next >'

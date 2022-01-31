@@ -13,7 +13,7 @@ class Main
 
     def setup_dependencies
       {
-        analyser: TextMood.new(language: "en"),
+        analyser: TextMood.new(language: "en", normalize_score: true),
         page_object: Scraping::MechanizePageObject.new
       }
     end

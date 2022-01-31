@@ -8,7 +8,7 @@ module Scraping
       @pages_count = pages_count
     end
 
-    def execute
+    def fetch_reviews
       @page_object.go_to_review_page(@first_page)
         .then {|page| extract_reviews(page)}
     end

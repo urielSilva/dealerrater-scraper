@@ -1,39 +1,45 @@
 require_relative '../../src/application.rb'
 require 'vcr'
+require 'byebug'
 
 RSpec.describe Application do
-  
-  let(:reviews) {
+
+  let(:dependencies) {
+    {
+      analyser: TextMood.new(language: "en", normalize_score: true),
+      page_object: Scraping::MechanizePageObject.new
+    }
+  }
+
+  let(:output) {
     [
       {
         rating: 5,
-        text: "We were very impressed with McKaig Chevrolet. Ryan F. was very " \
-        "personable and attentive to our vehicle needs. They made truck buying easy." \
-        " Thank you, Ryan, and thank you, Brandon! :)",
-        score: 3.4
+        text: "We came from New London texas to buy our new car. " \
+        "Our sales was Jeannie Evans and she really was alot of help " \
+        "we enjoyed her helping thank you jeannie.",
       },
       {
         rating: 5,
-        text: "Adrian was a great sales person. He was very professional." \
-        " He made the buying process so easy. He was very thorough in showing me " \
-        "everything about the truck. I really appreciate his kindness and",
-        score: 2.9499999999999997
+        text: "We were very impressed with McKaig Chevrolet. Ryan F. was " \
+        "very personable and attentive to our vehicle needs. They made truck " \
+        "buying easy. Thank you, Ryan, and thank you, Brandon! :)"
       },
       {
         rating: 5,
-        text: "We was treated with great respect and have all good things " \
-        "to say about ya'll every one was so nice we no where to go to get " \
-        "our next thank you so much for all you did for use we love our new car",
-        score: 2.55
+        text: "I found the sales specialist very informative. " \
+        "Her name was Jeannie Evans. She was most kind in explaining " \
+        "all of the operations of the vehicle. "
       }
     ]
   }
 
-  context 'teste' do
+
+  context '#execute' do
     it 'returns the top reviews for McKaig Chevrolet Buick dealer' do
       VCR.use_cassette("dealer_rater") do
-        result = Application.execute
-        expect(result).to eq(reviews)
+        result = Application.execute(**dependencies)
+        expect(result).to eq(output)
       end
     end
   end
